@@ -2,16 +2,8 @@ body {
   background-color: #152028;
 }
 
-
-.charts {
-  display: flex;
-  flex-direction: row;
-  background: red;
-}
-
-canvas {
-  display: inline-block !important;
-  flex-basis: 50%;
-  max-width: 50%;
-  margin: 0;
+:global {
+  .chart {
+    padding: 20px 0;
+  }
 }
