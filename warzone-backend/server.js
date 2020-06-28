@@ -33,8 +33,26 @@ const getPlayerStats = (player) => {
   });
 }
 
+const getPlayerWeeklyStats = (player) => {
+  return API.MWcombatwz(player).then(data => {
+    return {
+      ...data,
+      playerName: player
+    };
+  }).catch(err => {
+      console.log(err);
+  });
+}
+
 app.get('/', (req, res) => {
   const results = Promise.all(players.map(getPlayerStats));
+  results.then((data) => {
+    res.send(data);
+  })
+});
+
+app.get('/weekly', (req, res) => {
+  const results = Promise.all(players.map(getPlayerWeeklyStats));
   results.then((data) => {
     res.send(data);
   })

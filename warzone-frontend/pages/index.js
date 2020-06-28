@@ -1,70 +1,53 @@
 import Head from 'next/head';
 import axios from 'axios';
 import Chart from 'chart.js';
+import {
+  Table,
+  TableCell,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableSortLabel
+} from "@material-ui/core";
 import { useEffect, useState, useRef } from 'react';
 import BarChart from '../components/BarChart';
+import TabPanels from '../components/TabPanels';
 import "../styles/styles.scss"
 
 export default function Home() {
 
 const [playerData, setPlayerData] = useState(null);
+const [playerWeeklyData, setPlayerWeeklyData] = useState(null);
 
 useEffect(() => {
-  if (!playerData) {
-    axios.get('http://localhost:5500/')
-    .then((response) => {
-      setPlayerData(response.data);
-    }).catch((err) => {
-      console.log('error fetching player data', err);
-    })
-  }
+  (async () => {
+    if (!playerData) {
+      try {
+        const response = await axios.get('http://localhost:5500/');
+        setPlayerData(response.data);
+      } catch(error) {
+        console.log(error);
+      }
+    }
+    if (!playerWeeklyData) {
+      try {
+        console.log('yo yo yodsdsdsd');
+        const response = await axios.get('http://localhost:5500/weekly');
+        console.log(response.data);
+        setPlayerWeeklyData(response.data);
+      } catch(error) {
+        console.log(error);
+      }
+    }
+  })();
 }, []);
-
-const charts = [
-  { 
-    label: 'Wins',
-    type: 'bar',
-    stat: 'wins'
-  },
-  { 
-    label: 'Kill / Death Ratio',
-    type: 'bar',
-    stat: 'kdRatio'
-  },
-  { 
-    label: 'Games Played',
-    type: 'bar',
-    stat: 'gamesPlayed'
-  },
-  { 
-    label: 'Revives',
-    type: 'bar',
-    stat: 'revives'
-  },
-  { 
-    label: 'Score Per Minute',
-    type: 'bar',
-    stat: 'scorePerMinute'
-  }
-];
 
   return (
     <div className="container">
-      <div className="charts">
-        {charts.map((chart) => {
-          const { stat, label, type } = chart;
-          return (
-            <div className="chart">
-              <BarChart
-                label={label}
-                statType={stat}
-                playerData={playerData}
-                type={type}
-              />
-            </div>
-          )
-        })}
-      </div>
+      <TabPanels
+        playerData={playerData}
+        playerWeeklyData={playerWeeklyData}
+      />
     </div>
   )
 }
