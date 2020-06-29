@@ -4,7 +4,7 @@ import "../styles/styles.scss"
 
 export default function BarChart(props) {
 
-  const { playerData, statType, type, label } = props;
+const { playerData, statType, type, label } = props;
 
 const getNames = () => {
   return playerData.map(player => player.playerName);
@@ -69,7 +69,7 @@ useEffect(() => {
       }
     });
   }
-}, [playerData]);
+}, [playerData, statType]);
 
   return (
     <canvas
