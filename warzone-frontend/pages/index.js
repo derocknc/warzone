@@ -31,9 +31,7 @@ useEffect(() => {
     }
     if (!playerWeeklyData) {
       try {
-        console.log('yo yo yodsdsdsd');
         const response = await axios.get('http://localhost:5500/weekly');
-        console.log(response.data);
         setPlayerWeeklyData(response.data);
       } catch(error) {
         console.log(error);

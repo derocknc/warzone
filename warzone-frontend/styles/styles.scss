@@ -11,9 +11,6 @@ body {
 
 :global {
 
-  .container {
-    width: 100vw;
-  }
   .chart {
     padding: 20px 0;
   }
@@ -23,11 +20,6 @@ body {
     font-weight: 400;
     text-align: center;
   }
-
-  // .MuiPaper-root.MuiAppBar-colorPrimary {
-  //   // color: #fff;
-  //   // background-color: black;
-  // }
 
   .MuiPaper-root {
     .PrivateTabIndicator-colorSecondary-3 {

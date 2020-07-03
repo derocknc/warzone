@@ -20,7 +20,7 @@ API.login(process.env.COD_EMAIL, process.env.COD_PW).then((res) => {
   console.log(err);
 });
 
-const players = ['d_stutts', 'parky914', 'waking1987', 'burly1984', 'muskrat_mitch', 'robearpig'];
+const players = ['d_stutts', 'parky914', 'waking1987', 'd-rabb12', 'burly1984', 'muskrat_mitch', 'robearpig'];
 
 const getPlayerStats = (player) => {
   return API.MWBattleData(player).then(data => {
